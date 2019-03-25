@@ -1,8 +1,6 @@
 import org.junit.Test;
-import org.openqa.selenium.By;
-import org.openqa.selenium.Keys;
-import org.openqa.selenium.StaleElementReferenceException;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
@@ -40,5 +38,7 @@ public class TestExample extends BaseRunner {
                     });
                     return driver.getTitle().equals("Вакансии");
                 });
+        Actions actions = new Actions(driver);
+        actions.moveToElement(driver.findElement(By.xpath("//span[contains(text(),'Отправить')]"))).perform();
     }
 }
