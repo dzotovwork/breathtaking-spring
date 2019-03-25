@@ -4,8 +4,7 @@ import org.openqa.selenium.Keys;
 
 import static org.junit.Assert.assertEquals;
 
-public class FirstTest extends BaseRunner {
-
+public class SecondTest extends BaseRunner{
     @Test
     public void test1() {
         driver.get(baseUrl);
