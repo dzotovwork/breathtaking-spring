@@ -1,7 +1,6 @@
 import org.junit.After;
 import org.junit.Before;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
 
 import java.util.concurrent.TimeUnit;
 
@@ -11,7 +10,7 @@ public class BaseRunner {
 
     @Before
     public void setUp() {
-        driver = new ChromeDriver();
+        driver = BrowsersFactory.chrome.create();
         baseUrl = "https://www.tinkoff.ru/career/vacancies/";
         driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
     }
