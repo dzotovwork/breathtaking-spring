@@ -37,8 +37,16 @@
                 <artifactId>maven-surefire-plugin</artifactId>
                 <version>2.21.0</version>
                 <configuration>
+                    <!-- стратегия параллелизации-->
+                    <parallel>methods</parallel>
                     <!-- максимальное число процессов-->
-                    <forkCount>2</forkCount>
+                    <forkCount>1</forkCount>
+                    <!-- признак возможности переиспользования потока-->
+                    <reuseForks>true</reuseForks>
+                    <!-- соотношение потоков на cpu (Def = true)-->
+                    <perCoreThreadCount>false</perCoreThreadCount>
+                    <!-- максимально число потоков-->
+                    <threadCount>3</threadCount>
                     <systemPropertyVariables>
                         <browser>chrome</browser>
                     </systemPropertyVariables>
