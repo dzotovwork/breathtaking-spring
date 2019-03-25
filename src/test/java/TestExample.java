@@ -39,7 +39,9 @@ public class TestExample extends BaseRunner {
                     return driver.getTitle().equals("Вакансии");
                 });
         Actions actions = new Actions(driver);
-        actions.moveToElement(driver.findElement(By.xpath("//span[contains(text(),'Отправить')]"))).perform();
+        actions.moveToElement(driver.findElement(By.xpath("//span[contains(text(),'Отправить')]")))
+                .click()
+                .perform();
         JavascriptExecutor javascriptExecutor = (JavascriptExecutor) driver;
         javascriptExecutor.executeScript("arguments[0].scrollIntoView(true);",driver.findElement(By.xpath("//span[contains(text(),'Отправить')]")));
     }
