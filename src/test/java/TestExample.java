@@ -7,6 +7,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
 import java.util.List;
+import java.util.Set;
 
 public class TestExample extends BaseRunner {
 
@@ -18,20 +19,26 @@ public class TestExample extends BaseRunner {
                 .sendKeys("Тинькофф работа в москве");
         driver.findElement(By.xpath("//input[contains(@aria-label,'Запрос')]"))
                 .sendKeys(Keys.ENTER);
+        By listItems = By.xpath("//li[contains(@class,'serp-item')]/div/h2//div[contains(@class,'organic__url')]");
+        List<WebElement> items = driver.findElements(listItems);
         wait
                 .ignoring(StaleElementReferenceException.class)
                 .withMessage("что то пошло не так")
                 .pollingEvery(Duration.ofMillis(500))
                 .until(driver ->{
-                  By listItems = By.xpath("//li[contains(@class,'serp-item')]/div/h2//div[contains(@class,'organic__url')]");
-                    List<WebElement> items = driver.findElements(listItems);
                     for (WebElement element : items){
                         if (element.getText().contains("Вакансии | Тинькофф Банк")){
                             element.click();
                             break;
                         }
                     }
-                    return driver.getTitle().equals("Тинькофф");
+                    Set<String> ids = driver.getWindowHandles();
+                    ids.forEach(id -> {
+                        if (!id.equals(driver.getWindowHandle())){
+                            driver.switchTo().window(id);
+                        }
+                    });
+                    return driver.getTitle().equals("Вакансии");
                 });
     }
 }
