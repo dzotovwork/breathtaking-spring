@@ -40,5 +40,7 @@ public class TestExample extends BaseRunner {
                 });
         Actions actions = new Actions(driver);
         actions.moveToElement(driver.findElement(By.xpath("//span[contains(text(),'Отправить')]"))).perform();
+        JavascriptExecutor javascriptExecutor = (JavascriptExecutor) driver;
+        javascriptExecutor.executeScript("arguments[0].scrollIntoView(true);",driver.findElement(By.xpath("//span[contains(text(),'Отправить')]")));
     }
 }
