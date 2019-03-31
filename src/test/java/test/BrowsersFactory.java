@@ -9,12 +9,15 @@ import org.openqa.selenium.firefox.FirefoxOptions;
 import org.openqa.selenium.logging.LogType;
 import org.openqa.selenium.logging.LoggingPreferences;
 import org.openqa.selenium.remote.CapabilityType;
+import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.support.events.AbstractWebDriverEventListener;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.io.File;
 import java.io.IOException;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.logging.Level;
 
 public class BrowsersFactory {
@@ -45,7 +48,7 @@ public class BrowsersFactory {
         }
     }
 
-    public static WebDriver buildDriver(String browserName) {
+    public static WebDriver buildDriver(String browserName) throws MalformedURLException {
         switch (browserName) {
 
             case "chrome_invisible":
@@ -69,7 +72,7 @@ public class BrowsersFactory {
                 LoggingPreferences logPrefs = new LoggingPreferences();
                 logPrefs.enable(LogType.PERFORMANCE, Level.ALL);
                 options.setCapability(CapabilityType.LOGGING_PREFS, logPrefs);
-                return new ChromeDriver(options);
+                return new RemoteWebDriver(new URL("http://localhost:4444/wd/hub"),options);
         }
     }
 }

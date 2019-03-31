@@ -7,6 +7,7 @@ import pages.TinkoffJobPage;
 import pages.YandexPage;
 import test.BrowsersFactory;
 
+import java.net.MalformedURLException;
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -20,7 +21,7 @@ public class Application {
     public TinkoffJobPage tinkoffjob;
     public final String browserName = "chrome";
 
-    public Application() {
+    public Application() throws MalformedURLException{
         driver = new EventFiringWebDriver(getDriver());
         ((EventFiringWebDriver) driver).register(new BrowsersFactory.MyListener());
         wait = new WebDriverWait(driver, 10);
@@ -37,7 +38,7 @@ public class Application {
         driver = null;
     }
 
-    private WebDriver getDriver() {
+    private WebDriver getDriver() throws MalformedURLException {
         return BrowsersFactory.buildDriver(browserName);
     }
 
