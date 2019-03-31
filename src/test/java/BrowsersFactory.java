@@ -4,12 +4,16 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxOptions;
+import org.openqa.selenium.logging.LogType;
+import org.openqa.selenium.logging.LoggingPreferences;
+import org.openqa.selenium.remote.CapabilityType;
 import org.openqa.selenium.support.events.AbstractWebDriverEventListener;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.logging.Level;
 
 public class BrowsersFactory {
     public static class MyListener extends AbstractWebDriverEventListener {
@@ -60,6 +64,9 @@ public class BrowsersFactory {
             default:
                 ChromeOptions options = new ChromeOptions();
                 options.addArguments("--disable-notifications");
+                LoggingPreferences logPrefs = new LoggingPreferences();
+                logPrefs.enable(LogType.PERFORMANCE, Level.ALL);
+                options.setCapability(CapabilityType.LOGGING_PREFS, logPrefs);
                 return new ChromeDriver(options);
         }
     }
