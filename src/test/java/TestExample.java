@@ -2,12 +2,15 @@ import org.junit.Test;
 import org.openqa.selenium.*;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.time.Duration;
 import java.util.List;
 import java.util.Set;
 
 public class TestExample extends BaseRunner {
+    Logger logger = LoggerFactory.getLogger(TestExample.class);
 
     @Test
     public void test1() {
@@ -34,6 +37,7 @@ public class TestExample extends BaseRunner {
                     ids.forEach(id -> {
                         if (!id.equals(driver.getWindowHandle())){
                             driver.switchTo().window(id);
+                            logger.info("Переключились к вкладке " + driver.getTitle());
                         }
                     });
                     return driver.getTitle().equals("Вакансии");

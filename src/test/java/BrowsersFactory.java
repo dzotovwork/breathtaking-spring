@@ -5,6 +5,8 @@ import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxOptions;
 import org.openqa.selenium.support.events.AbstractWebDriverEventListener;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.File;
 import java.io.IOException;
@@ -12,14 +14,16 @@ import java.io.IOException;
 public class BrowsersFactory {
     public static class MyListener extends AbstractWebDriverEventListener {
 
+        Logger logger = LoggerFactory.getLogger(BrowsersFactory.class);
+
         @Override
         public void beforeFindBy(By by, WebElement element, WebDriver driver) {
-            System.out.println("Обращение к элементу " + by);
+            logger.info("Обращение к элементу " + by);
         }
 
         @Override
         public void afterFindBy(By by, WebElement element, WebDriver driver) {
-            System.out.println("Найден элемент " + by);
+            logger.info("Найден элемент " + by);
         }
 
         @Override
@@ -30,8 +34,8 @@ public class BrowsersFactory {
                 Files.copy(tmp, file);
             } catch (IOException e) {
                 e.printStackTrace();
+                logger.error(file.getAbsolutePath());
             }
-            System.err.println(file.getAbsolutePath());
         }
     }
 
